@@ -19,9 +19,12 @@ class AppWindow(Gtk.Window):
         self.region_id = Gtk.Entry()
         self.update_button = Gtk.Button.new_with_label('Update')
         self.update_button.connect("clicked", self.update_clicked)
+        self.recent_id_label = Gtk.Label(label=f'Most recent id: -1')
 
         grid.attach(Gtk.Label(label='Region ID:'), 0, 0, 1, 1)
         grid.attach(self.region_id, 1, 0, 1, 1)
+        grid.attach(self.recent_id_label, 2, 0, 1, 1)
+        # grid.attach(Gtk.Label(label='Most recent ID:'), 2, 0, 1, 1)
         grid.attach(Gtk.Label(label='Connecting IDs:'), 0, 1, 1, 1)
         grid.attach(self.input_other_ids, 1, 1, 1, 1)
         grid.attach(self.update_button, 0, 2, 2, 1)
@@ -69,3 +72,5 @@ class AppWindow(Gtk.Window):
         for resp in responses:
             updated_cells += resp['updatedCells']
         print('updated cells:', updated_cells)
+
+        self.recent_id_label.set_text(f'Most recent id: {self.region_id.get_text()}')
